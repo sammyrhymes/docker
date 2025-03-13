@@ -1,0 +1,25 @@
+# start with an image e.g ubuntu, open-suse, node, etc
+FROM ubuntu
+
+# commands can either be written as CMD sleep 5 or CMD ["sleep", "5"]
+# the latter is encouraged.
+# CMD ["sleep", "5"]
+
+# to create the container we first build the file
+# with the command docker build -t <container-name> . the "." is for
+# the location of the dockerfile
+# to run the container use docker run <container-name>
+# we can run an existing image straight from the terminal using
+# docker run <image-name> additionally you can append commands to it e.g
+# docker run ubuntu sleep 10 this will start the container and stop it 
+# after 10 seconds
+
+# with our sleeper container we can have it take inputs straight from 
+# terminal using The entrypoint
+
+# Using the entrypoint requires a default for when user does not append
+# a value
+
+
+ENTRYPOINT [ "sleep" ]
+CMD [ "5" ]
