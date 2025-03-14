@@ -1,0 +1,35 @@
+# Docker allows for 3 types of network arrangements
+# 1. Bridge
+# with the default docker run ubuntu, a private network is created on the host
+# containers get an internal ip address of the 172.17 range and the ontainers
+# can communicate to each other and multiple ports can be assigned to different
+# ports making it possible for multiple web servers to be accessible in the network
+# 
+# 2. Host network
+# docker run ubuntu --network=host
+# this associates the docker container to the host network, this reomves any chance
+# of network issolation. No port mapping required but no muliple web servers can run.
+
+# 3. None
+# docker run ubuntu --network=None
+# this means that the container is issolated from any network even the host network
+
+# By default docker creates a single bridge network but users can 
+# create their own network using the command
+# docker network create \ 
+#     --driver bridge \
+#     --subnet 182.18.0.0/16
+#     custom-isolated-network
+# you can run the docker network ls to see all networks available
+# you can aslo dig deeper with docker inspect <container-name>
+
+# EMBEDDED DNS
+# docker has an embedded dns server which assignes the containers ip addresses
+# since you cant be sure when on restart it will get the same ip as before
+# you can use the container name as a domain name and the dns server will
+# take care of finding the intended resource.
+
+# e.g a to-do app with a mysql db to connect to it instaed of 
+# mysql.connect(172.17.0.3) which is subject to change, we can use the 
+# name of the container as a domain name e.g mysql.connect(mysql) and the ip changes
+# wont matter
